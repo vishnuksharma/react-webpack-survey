@@ -1,0 +1,28 @@
+# Created by .ignore support plugin (hsz.mobi)
+### JetBrains template
+*.iml
+
+## Directory-based project format:
+.idea/
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# NodeJS modules folder
+node_modules
+readMe
+
+# npm debug log
+npm-debug.log
+
+# vs code
+.vscode
+
+# coverage
+
+/coverage
+
+# Dist folder
+dist/
