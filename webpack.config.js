@@ -151,7 +151,11 @@ const config = {
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin({ filename: './styles/style.css', disable: false, allChunks: true }),
-    // new CopyWebpackPlugin([{ from: 'vendors', to: 'vendors' }]),
+    new CopyWebpackPlugin([{ from: 'public', to: 'public' }]),
+    // new CopyWebpackPlugin ([{
+		// 	from: helpers.root ('public'),
+		// 	to: helpers.root ('dist/public')
+		// }]),
     new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
     new webpack.HotModuleReplacementPlugin(),
   ]

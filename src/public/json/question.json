@@ -1,0 +1,46 @@
+{
+    "questions": [
+      {
+        "id":"1",
+        "title": "What is your name?",
+        "type": "textbox",
+        "name":"fullname",
+        "placeholder":"Enter Your Name..."
+      },
+      {
+        "id":"2",
+        "title": "What is your father name?",
+        "type": "textbox",
+        "name":"fathername",
+        "placeholder":"Enter Your Father's Name..."
+      },
+      {
+        "id":"3",
+        "title": "What is your age?",
+        "type": "number",
+        "name":"yourage",
+        "placeholder":"Enter Your Age"
+      },
+      {
+        "id":"4",
+        "title": "In Which country do you live?",
+        "type": "select",
+        "name":"country",
+        "placeholder":"PLEASE Select your Country..."
+      },
+      {
+        "id":"5",
+        "title": "Are you?",
+        "type": "radio",
+        "name":"youare",
+        "placeholder":"Select Your Sex..."
+      },
+      {
+        "id":"6",
+        "title": "How many language do you know?",
+        "type": "checkbox",
+        "name":"language",
+        "placeholder":"Select Language..."
+      }
+    ]
+  }
