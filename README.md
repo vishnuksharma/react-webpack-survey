@@ -32,3 +32,6 @@ Make sure you have the latest Stable or LTS version of Node.js installed.
 ## Production code
 
 Run `npm run production`. The production-ready code will be located under `dist` folder.
+
+## Layout View
+![Survey-App](src/assets/images/surveyscreen.png)
