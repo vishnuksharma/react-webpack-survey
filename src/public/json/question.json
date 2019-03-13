@@ -32,7 +32,7 @@
         "id":"5",
         "title": "Are you?",
         "type": "radio",
-        "name":"youare",
+        "name":"gender",
         "placeholder":"Select Your Sex..."
       },
       {

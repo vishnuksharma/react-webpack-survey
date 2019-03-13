@@ -9,9 +9,15 @@ export default class RadioBtn extends React.Component {
   render() {
     return (
         <div className="col-75">
-            <input type="radio" name="gender" value="Male" />
-            <input type="radio" name="gender" value="Female" />
-            <input type="radio" name="gender" value="Other" />
+            <label htmlFor={this.props.name}>
+                <input type="radio" id={this.props.name} name={this.props.name} value="Male" /> Male
+            </label>
+            <label>
+                <input type="radio" id={this.props.name} name={this.props.name}value="Female" />Female
+            </label>
+            <label>
+                <input type="radio" id={this.props.name} name={this.props.name} value="Other" />Other
+            </label>
         </div>
     );
   }

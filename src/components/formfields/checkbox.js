@@ -9,21 +9,21 @@ export default class Checkbox extends React.Component {
   render() {
     return (
         <div className="col-75">
-            <label class="container">Hindi
-            <input type="checkbox" />
-            <span class="checkmark"></span>
+            <label className="container">Hindi
+            <input type="checkbox" name={this.props.name}/>
+            <span className="checkmark"></span>
             </label>
-            <label class="container">English
-            <input type="checkbox" />
-            <span class="checkmark"></span>
+            <label className="container">English
+            <input type="checkbox" name={this.props.name} />
+            <span className="checkmark"></span>
             </label>
-            <label class="container">French
-            <input type="checkbox" />
-            <span class="checkmark"></span>
+            <label className="container">French
+            <input type="checkbox" name={this.props.name} />
+            <span className="checkmark"></span>
             </label>
-            <label class="container">German
-            <input type="checkbox" />
-            <span class="checkmark"></span>
+            <label className="container">German
+            <input type="checkbox" name={this.props.name} />
+            <span className="checkmark"></span>
             </label>
         </div>
     );

@@ -10,8 +10,12 @@ export default class Survey extends React.Component {
   constructor(props) {
     super(props);
     this.renderQuestion = this.renderQuestion.bind(this);
+    this.backHandleClick = this.backHandleClick.bind(this);
+    this.nextHandleClick = this.nextHandleClick.bind(this);
     this.state = {
       questionData: [],
+      numberOfQues:0,
+      currentPage:1,
     };
   }
 
@@ -29,6 +33,7 @@ export default class Survey extends React.Component {
     surveyData.then((data) => {
       this.setState({
         questionData: data.questions,
+        numberOfQues: data.questions.length
       });
     });
   }
@@ -36,6 +41,7 @@ export default class Survey extends React.Component {
   renderQuestion(questions) {
     console.log(questions);
     if (questions && questions.length>0){
+        // this.displayQues();
         return(
         <div className="form-container">
           {questions.map((data) => {
@@ -92,10 +98,37 @@ export default class Survey extends React.Component {
     }
   }
 
+  componentDidUpdate(){
+    document.querySelectorAll('.surveycomponent .form-container .row')[0].style.display = 'block';
+    if (this.state.currentPage === 1 ) {
+        const divEle = document.querySelector('.backBtn button');
+        divEle.disabled = true;
+        divEle.classList.add("disabled");
+    }
+      console.log('here', document.querySelectorAll('.surveycomponent .form-container .row').length );
+
+  }
+
+  backHandleClick() {
+    console.log('back hang=dle')
+  }
+
+  nextHandleClick() {
+    console.log('next hang=dle')
+  }
+
   render() {
     return (
       <section className="surveycomponent">
         {this.renderQuestion(this.state.questionData)}
+        <div className="buttons-container">
+            <div className="backBtn">
+                <button onClick={this.backHandleClick} type="button" className="button-warning pure-button">Back</button>
+            </div>
+            <div className="nextBtn">
+                <button onClick={this.nextHandleClick} type="button" className="button-secondary pure-button">Next</button>
+            </div>
+        </div>
       </section>
     );
   }
