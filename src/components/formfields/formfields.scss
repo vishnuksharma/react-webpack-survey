@@ -19,7 +19,7 @@
       }
       
       label {
-        padding: 12px 12px 12px 0;
+        padding: 21px 21px 12px 0;
         display: inline-block;
       }
       
@@ -40,7 +40,7 @@
       .container {
         border-radius: 5px;
         // background-color: #f2f2f2;
-        padding: 20px;
+        padding: 10px;
       }
       
       .col-25 {
@@ -138,5 +138,8 @@
   
   .row{
     display: none;
+  }
+  #country{
+    height: 62px;;
   }
 }

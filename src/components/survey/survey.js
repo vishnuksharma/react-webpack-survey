@@ -15,7 +15,7 @@ export default class Survey extends React.Component {
     this.state = {
       questionData: [],
       numberOfQues:0,
-      currentPage:1,
+      currentPage:0,
     };
   }
 
@@ -99,22 +99,62 @@ export default class Survey extends React.Component {
   }
 
   componentDidUpdate(){
-    document.querySelectorAll('.surveycomponent .form-container .row')[0].style.display = 'block';
-    if (this.state.currentPage === 1 ) {
-        const divEle = document.querySelector('.backBtn button');
+    document.querySelectorAll('.surveycomponent .form-container .row')[this.state.currentPage].classList.add('displayblock');
+    const divEle = document.querySelector('.backBtn button');
+    if (this.state.currentPage === 0 ) {
         divEle.disabled = true;
         divEle.classList.add("disabled");
     }
-      console.log('here', document.querySelectorAll('.surveycomponent .form-container .row').length );
 
+  }
+
+  handleNextAndBackClick(buttonClass, clickType) {
+    console.log(buttonClass, clickType);
+    const divEle = document.querySelector(buttonClass);
+    if (this.state.currentPage === 0 && clickType === 'back') {
+        divEle.disabled = true;
+        divEle.classList.add("disabled");
+    } else if (this.state.currentPage === (this.state.numberOfQues - 2) && clickType === 'next') {
+        divEle.disabled = true;
+        divEle.classList.add("disabled");
+    }else {
+        divEle.disabled = false;
+        divEle.classList.remove("disabled");
+    }
   }
 
   backHandleClick() {
-    console.log('back hang=dle')
+    // Enable Next Btn
+    document.querySelector('.nextBtn button').disabled = false;
+    document.querySelector('.nextBtn button').classList.remove("disabled");
+
+    this.handleNextAndBackClick('.backBtn button', 'back');
+
+    const pageNum = this.state.currentPage;
+    document.querySelectorAll('.surveycomponent .form-container .row')[pageNum].classList.remove('displayblock');
+    document.querySelectorAll('.surveycomponent .form-container .row')[pageNum-1].classList.add('displayblock');
+    this.setState({
+        currentPage: pageNum-1,
+    });
+
+    // console.log('back handle', this.state.currentPage)
   }
 
   nextHandleClick() {
-    console.log('next hang=dle')
+    // Enable Back btn
+    document.querySelector('.backBtn button').disabled = false;
+    document.querySelector('.backBtn button').classList.remove("disabled");
+
+    this.handleNextAndBackClick('.nextBtn button', 'next');
+    
+    const pageNum = this.state.currentPage;
+    console.log(pageNum, '=========')
+    document.querySelectorAll('.surveycomponent .form-container .row')[pageNum].classList.remove('displayblock');
+    document.querySelectorAll('.surveycomponent .form-container .row')[pageNum+1].classList.add('displayblock');
+    this.setState({
+        currentPage: pageNum+1,
+    });
+    // console.log('next handle', this.state.currentPage)
   }
 
   render() {
