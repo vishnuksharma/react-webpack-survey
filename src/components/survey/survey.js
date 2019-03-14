@@ -99,12 +99,17 @@ export default class Survey extends React.Component {
   }
 
   componentDidUpdate(){
-    document.querySelectorAll('.surveycomponent .form-container .row')[this.state.currentPage].classList.add('displayblock');
-    const divEle = document.querySelector('.backBtn button');
+    const rowEle = document.querySelectorAll('.surveycomponent .form-container .row')[this.state.currentPage];
+    rowEle.classList.add('displayblock');
+    const backEle = document.querySelector('.backBtn button');
+    // const nextEle = document.querySelector('.nextBtn button');
     if (this.state.currentPage === 0 ) {
-        divEle.disabled = true;
-        divEle.classList.add("disabled");
+        backEle.disabled = true;
+        backEle.classList.add("disabled");
+        // nextEle.disabled = true;
+        // nextEle.classList.add("disabled");
     }
+    // divEle.querySelector('input').value
 
   }
 
@@ -114,10 +119,12 @@ export default class Survey extends React.Component {
     if (this.state.currentPage === 0 && clickType === 'back') {
         divEle.disabled = true;
         divEle.classList.add("disabled");
-    } else if (this.state.currentPage === (this.state.numberOfQues - 2) && clickType === 'next') {
-        divEle.disabled = true;
-        divEle.classList.add("disabled");
-    }else {
+    } 
+    // else if (this.state.currentPage === (this.state.numberOfQues - 2) && clickType === 'next') {
+    //     divEle.disabled = true;
+    //     divEle.classList.add("disabled");
+    // }
+    else {
         divEle.disabled = false;
         divEle.classList.remove("disabled");
     }
@@ -136,8 +143,6 @@ export default class Survey extends React.Component {
     this.setState({
         currentPage: pageNum-1,
     });
-
-    // console.log('back handle', this.state.currentPage)
   }
 
   nextHandleClick() {
@@ -145,16 +150,18 @@ export default class Survey extends React.Component {
     document.querySelector('.backBtn button').disabled = false;
     document.querySelector('.backBtn button').classList.remove("disabled");
 
-    this.handleNextAndBackClick('.nextBtn button', 'next');
+    document.querySelector('.nextBtn button').disabled = true;
+    document.querySelector('.nextBtn button').classList.add("disabled");
+    // this.handleNextAndBackClick('.nextBtn button', 'next');
     
     const pageNum = this.state.currentPage;
-    console.log(pageNum, '=========')
+    
     document.querySelectorAll('.surveycomponent .form-container .row')[pageNum].classList.remove('displayblock');
     document.querySelectorAll('.surveycomponent .form-container .row')[pageNum+1].classList.add('displayblock');
     this.setState({
         currentPage: pageNum+1,
     });
-    // console.log('next handle', this.state.currentPage)
+    
   }
 
   render() {
