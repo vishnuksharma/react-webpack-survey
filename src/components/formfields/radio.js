@@ -23,13 +23,13 @@ export default class RadioBtn extends React.Component {
     return (
         <div className="col-75">
             <label htmlFor={this.props.name}>
-                <input onChange={this.handleSelect} type="radio" id={this.props.name} name={this.props.name} value="Male" /> Male
+                <input ref={this.props.name} onChange={this.handleSelect} type="radio" id={this.props.name} name={this.props.name} value="Male" /> Male
             </label>
             <label>
-                <input onChange={this.handleSelect} type="radio" id={this.props.name} name={this.props.name}value="Female" />Female
+                <input ref={this.props.name} onChange={this.handleSelect} type="radio" id={this.props.name} name={this.props.name}value="Female" />Female
             </label>
             <label>
-                <input onChange={this.handleSelect} type="radio" id={this.props.name} name={this.props.name} value="Other" />Other
+                <input ref={this.props.name} onChange={this.handleSelect} type="radio" id={this.props.name} name={this.props.name} value="Other" />Other
             </label>
         </div>
     );

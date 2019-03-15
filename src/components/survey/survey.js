@@ -5,6 +5,7 @@ import Numberinput from '../formfields/numberinput';
 import Dropdown from '../formfields/dropdown';
 import RadioBtn from '../formfields/radio';
 import Checkbox from '../formfields/checkbox';
+import Summary from './summary';
 
 export default class Survey extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export default class Survey extends React.Component {
       questionData: [],
       numberOfQues:0,
       currentPage:0,
+      quesAnsList: {},
     };
   }
 
@@ -39,10 +41,11 @@ export default class Survey extends React.Component {
   }
 
   renderQuestion(questions) {
-    console.log(questions);
+    // console.log(questions);
     if (questions && questions.length>0){
         // this.displayQues();
         return(
+        <form id="surveyForm">
         <div className="form-container">
           {questions.map((data) => {
             if (data.type === 'textbox'){
@@ -94,6 +97,7 @@ export default class Survey extends React.Component {
             
           })}
         </div>
+        </form>
         );
     }
   }
@@ -114,7 +118,7 @@ export default class Survey extends React.Component {
   }
 
   handleNextAndBackClick(buttonClass, clickType) {
-    console.log(buttonClass, clickType);
+    // console.log(buttonClass, clickType);
     const divEle = document.querySelector(buttonClass);
     if (this.state.currentPage === 0 && clickType === 'back') {
         divEle.disabled = true;
@@ -138,6 +142,13 @@ export default class Survey extends React.Component {
     this.handleNextAndBackClick('.backBtn button', 'back');
 
     const pageNum = this.state.currentPage;
+    // console.log(pageNum, '====')
+    if (pageNum === (this.state.numberOfQues - 1) ) {
+        document.querySelector('.surveycomponent .form-container').classList.remove('displaynone');
+        document.querySelector('.surveycomponent .summary-container').classList.remove('displayblock');
+    }
+
+
     document.querySelectorAll('.surveycomponent .form-container .row')[pageNum].classList.remove('displayblock');
     document.querySelectorAll('.surveycomponent .form-container .row')[pageNum-1].classList.add('displayblock');
     this.setState({
@@ -153,14 +164,29 @@ export default class Survey extends React.Component {
     document.querySelector('.nextBtn button').disabled = true;
     document.querySelector('.nextBtn button').classList.add("disabled");
     // this.handleNextAndBackClick('.nextBtn button', 'next');
-    
+
     const pageNum = this.state.currentPage;
+
+    // const form1 = document.querySelector('#surveyForm');
+    // var data = new FormData(form1);
+    // var json = Array.from(data);
+
     
-    document.querySelectorAll('.surveycomponent .form-container .row')[pageNum].classList.remove('displayblock');
-    document.querySelectorAll('.surveycomponent .form-container .row')[pageNum+1].classList.add('displayblock');
-    this.setState({
-        currentPage: pageNum+1,
-    });
+    if (pageNum !== (this.state.numberOfQues - 1) ) {
+        document.querySelectorAll('.surveycomponent .form-container .row')[pageNum].classList.remove('displayblock');
+        document.querySelectorAll('.surveycomponent .form-container .row')[pageNum+1].classList.add('displayblock');
+        this.setState({
+            currentPage: pageNum+1,
+        });
+    } else if (pageNum === (this.state.numberOfQues - 1) ) {
+        const form = document.querySelector('#surveyForm');
+        var data = new FormData(form);
+        var json = Array.from(data).reduce((o,[k,v])=>(o[k]=v,o),{});
+        this.setState({quesAnsList: json})
+        document.querySelector('.surveycomponent .form-container').classList.add('displaynone');
+        document.querySelector('.surveycomponent .summary-container').classList.add('displayblock');
+    }
+    
     
   }
 
@@ -168,6 +194,9 @@ export default class Survey extends React.Component {
     return (
       <section className="surveycomponent">
         {this.renderQuestion(this.state.questionData)}
+        <div className="summary-container">
+            <Summary queslist={this.state.questionData} anslist={this.state.quesAnsList} />
+        </div>
         <div className="buttons-container">
             <div className="backBtn">
                 <button onClick={this.backHandleClick} type="button" className="button-warning pure-button">Back</button>
@@ -176,6 +205,7 @@ export default class Survey extends React.Component {
                 <button onClick={this.nextHandleClick} type="button" className="button-secondary pure-button">Next</button>
             </div>
         </div>
+        
       </section>
     );
   }

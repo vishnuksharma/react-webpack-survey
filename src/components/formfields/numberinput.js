@@ -21,7 +21,7 @@ export default class Numberinput extends React.Component {
   render() {
     return (
         <div className="col-75">
-            <input onKeyUp={this.handleKeyUp} type="number" id={this.props.name} name={this.props.name} placeholder={this.props.placeholder} />
+            <input ref={this.props.name} onKeyUp={this.handleKeyUp} type="number" id={this.props.name} name={this.props.name} placeholder={this.props.placeholder} />
         </div>
     );
   }
