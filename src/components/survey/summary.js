@@ -6,14 +6,32 @@ export default class Summary extends React.Component {
     // console.log(this.props.anslist)
   }
 
+  getAnswerMapping(ques, ansList) {
+    if (ques.name.includes("language") ) {
+        return (
+            <td>
+                {(ansList[ques.name+'hindi'])?ansList[ques.name+'hindi']+',':''}
+                {(ansList[ques.name+'eng'])?ansList[ques.name+'eng']+',':''}
+                {(ansList[ques.name+'french'])?ansList[ques.name+'french']+',':''}
+                {(ansList[ques.name+'german'])?ansList[ques.name+'german']:''}
+            </td>
+        )
+    } else {
+        return (
+            <td>{ansList[ques.name]}</td>
+        )
+    }
+    
+  }
+
   renderQuesAnswer(quesList, ansList) {
     return(
-            
+        
         quesList.map(ques => {
             return(
             <tr key={ques.id}>
                 <td>{ques.title}</td>
-                <td>{ansList[ques.name]}</td>
+                { this.getAnswerMapping(ques, ansList) }
             </tr>
             )
         })

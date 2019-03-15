@@ -158,23 +158,19 @@ export default class Survey extends React.Component {
 
   nextHandleClick() {
     // Enable Back btn
+    const visibleRow = document.querySelectorAll('.surveycomponent .form-container .row');
     document.querySelector('.backBtn button').disabled = false;
     document.querySelector('.backBtn button').classList.remove("disabled");
 
     document.querySelector('.nextBtn button').disabled = true;
     document.querySelector('.nextBtn button').classList.add("disabled");
-    // this.handleNextAndBackClick('.nextBtn button', 'next');
 
     const pageNum = this.state.currentPage;
 
-    // const form1 = document.querySelector('#surveyForm');
-    // var data = new FormData(form1);
-    // var json = Array.from(data);
-
     
     if (pageNum !== (this.state.numberOfQues - 1) ) {
-        document.querySelectorAll('.surveycomponent .form-container .row')[pageNum].classList.remove('displayblock');
-        document.querySelectorAll('.surveycomponent .form-container .row')[pageNum+1].classList.add('displayblock');
+        visibleRow[pageNum].classList.remove('displayblock');
+        visibleRow[pageNum+1].classList.add('displayblock');
         this.setState({
             currentPage: pageNum+1,
         });
@@ -186,7 +182,6 @@ export default class Survey extends React.Component {
         document.querySelector('.surveycomponent .form-container').classList.add('displaynone');
         document.querySelector('.surveycomponent .summary-container').classList.add('displayblock');
     }
-    
     
   }
 
